@@ -1,5 +1,5 @@
-model/__pychche__
-utils/__pychche__
+model/__pycache__/*
+utils/__pycache__/*
 model.bin
 
 
