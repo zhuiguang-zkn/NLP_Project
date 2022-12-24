@@ -15,7 +15,7 @@ class Example():
 
     @classmethod
     def load_dataset(cls, data_path):
-        datas = json.load(open(data_path, 'r'))
+        datas = json.load(open(data_path, 'r', encoding='utf-8'))
         examples = []
         for data in datas:
             for utt in data:
