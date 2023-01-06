@@ -51,7 +51,7 @@ class Vocab():
 
 class LabelVocab():
     """ Numbers tags. E.g., `convert_tag_to_idx["B-inform-poi名称"] = 2` and
-    `convert_idx_to_tag[2] = "convert_idx_to_tag"`.
+    `convert_idx_to_tag[2] = "B-inform-poi名称"`.
     """    
 
     def __init__(self, root):
