@@ -7,6 +7,8 @@ EOS = '</s>'
 
 
 class Vocab():
+    """ Numbers words. E.g., `self["蓉"] = 1740`.
+    """    
 
     def __init__(self, padding=False, unk=False, min_freq=1, filepath=None):
         super(Vocab, self).__init__()
@@ -48,6 +50,9 @@ class Vocab():
 
 
 class LabelVocab():
+    """ Numbers tags. E.g., `convert_tag_to_idx["B-inform-poi名称"] = 2` and
+    `convert_idx_to_tag[2] = "convert_idx_to_tag"`.
+    """    
 
     def __init__(self, root):
         self.tag2idx, self.idx2tag = {}, {}

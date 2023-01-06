@@ -3,6 +3,15 @@ import torch
 
 
 def from_example_list(args, ex_list, device='cpu', train=True):
+    """ Returns a `Batch` object given a list of `Example` objects.
+    Besides, some more attributes of `Batch` are set:
+    + `utt` is a list of `utt` (text) of each example;
+    + `input_ids` is a tensor containing ids of words in each example;
+    + `lengths` is a list containing numbers of words in each example;
+    + `labels` is a list of `slotvalue` (semantic) of each example;
+    + `tag_ids` is a list of `tag_id` of each example, all `tag_id`'s are padded to the maximum length with `tag_pad_idx`;
+    + `tag_mask` is a list of bits of the same shape as `tag_ids`, indicating whether an id is not pad.
+    """    
     ex_list = sorted(ex_list, key=lambda x: len(x.input_idx), reverse=True)
     batch = Batch(ex_list, device)
     pad_idx = args.pad_idx
@@ -32,6 +41,8 @@ def from_example_list(args, ex_list, device='cpu', train=True):
 
 
 class Batch():
+    """ Object for a batch of `Example` objects. For an index `idx`, `self[idx]` is an `Example` object.
+    """    
 
     def __init__(self, examples, device):
         super(Batch, self).__init__()
