@@ -5,6 +5,22 @@ from utils.word2vec import Word2vecUtils
 from utils.evaluator import Evaluator
 
 class Example():
+    """ Object for describing an example.
+    E.g., if `obj = Example(ex: dict)`, where
+    
+    `ex = {'utt_id': 1, 'manual_transcript': '我要去新光北路', 'asr_1best': '我要去新光北路', 'semantic': [['inform', '终点名称', '新光北路']]},`
+
+    then
+    + `obj.utt = '我要去新光北路'`, 
+    + `obj.slot = {'inform-终点名称': '新光北路'}`, 
+    + `obj.tags = ['O', 'O', 'O', 'B-inform-终点名称', 'I-inform-终点名称', 'I-inform-终点名称', 'I-inform-终点名称']`,
+    + `obj.slotvalue = ['inform-终点名称-新光北路']`,
+    + `obj.input_idx = [21, 40, 41, 60, 229, 151, 83]` (indices of words),
+    + `obj.tag_id = [1, 1, 1, 14, 15, 15, 15]` (indices of tags of words).
+
+    Also, the class method `load_dataset` returns a list of `Example` objects from dataset, and the class method 
+    `configuration` initializes objects of `Evaluator`, `Vocab`, `Word2vecUtils` and `LabelVocab` as class attributes.
+    """    
 
     @classmethod
     def configuration(cls, root, train_path=None, word2vec_path=None):
@@ -15,7 +31,10 @@ class Example():
 
     @classmethod
     def load_dataset(cls, data_path):
-        datas = json.load(open(data_path, 'r'))
+        """ Returns a list of `Example` objects from dataset.
+        """
+
+        datas = json.load(open(data_path, 'r', encoding='utf-8'))
         examples = []
         for data in datas:
             for utt in data:

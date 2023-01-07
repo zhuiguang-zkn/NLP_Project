@@ -1,6 +1,8 @@
 #coding=utf8
 
 class Evaluator():
+    """ Calculates the precision, recall and F1-score.
+    """    
 
     def acc(self, predictions, labels):
         metric_dicts = {}

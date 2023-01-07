@@ -7,6 +7,8 @@ EOS = '</s>'
 
 
 class Vocab():
+    """ Numbers words. E.g., `self["蓉"] = 1740`.
+    """    
 
     def __init__(self, padding=False, unk=False, min_freq=1, filepath=None):
         super(Vocab, self).__init__()
@@ -23,7 +25,7 @@ class Vocab():
             self.from_train(filepath, min_freq=min_freq)
 
     def from_train(self, filepath, min_freq=1):
-        with open(filepath, 'r') as f:
+        with open(filepath, 'r', encoding='utf-8') as f:
             trains = json.load(f)
         word_freq = {}
         for data in trains:
@@ -48,6 +50,9 @@ class Vocab():
 
 
 class LabelVocab():
+    """ Numbers tags. E.g., `convert_tag_to_idx["B-inform-poi名称"] = 2` and
+    `convert_idx_to_tag[2] = "B-inform-poi名称"`.
+    """    
 
     def __init__(self, root):
         self.tag2idx, self.idx2tag = {}, {}
@@ -59,7 +64,7 @@ class LabelVocab():
         self.from_filepath(root)
 
     def from_filepath(self, root):
-        ontology = json.load(open(os.path.join(root, 'ontology.json'), 'r'))
+        ontology = json.load(open(os.path.join(root, 'ontology.json'), 'r', encoding='utf-8'))
         acts = ontology['acts']
         slots = ontology['slots']
 

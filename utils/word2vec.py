@@ -5,6 +5,8 @@ from utils.vocab import PAD, UNK
 import torch
 
 class Word2vecUtils():
+    """ Converts words to vectors. E.g., `self.word2vec["都"]` is a tensor.
+    """    
 
     def __init__(self, word2vec_file):
         super(Word2vecUtils, self).__init__()
@@ -25,7 +27,7 @@ class Word2vecUtils():
         return 1 - outliers / float(len(vocab))
 
     def read_from_file(self, word2vec_file):
-        with open(word2vec_file, 'r') as f:
+        with open(word2vec_file, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip('\n')
                 items = line.split(' ')
