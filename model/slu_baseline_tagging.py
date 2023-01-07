@@ -6,15 +6,21 @@ import torch.nn.utils.rnn as rnn_utils
 
 class SLUTagging(nn.Module):
 
+
     def __init__(self, config):
         super(SLUTagging, self).__init__()
         self.config = config
-        self.cell = config.encoder_cell
+        self.cell = config.encoder_cell  # config.encoder_cell in ['LSTM', 'GRU', 'RNN']
             # config.encoder_cell in ['LSTM', 'GRU', 'RNN']
         self.word_embed = nn.Embedding(config.vocab_size, config.embed_size, padding_idx=0)
-        self.rnn = getattr(nn, self.cell)(config.embed_size, config.rnn_hidden_size // 2, num_layers=config.rnn_num_layers, bidirectional=True, batch_first=True)
-            # self.rnn in ['LSTM', 'GRU', 'RNN']
+        self.rnn = getattr(nn, self.cell)(  # self.rnn in ['LSTM', 'GRU', 'RNN']
+            config.embed_size,
+            config.rnn_hidden_size // 2, 
+            num_layers=config.rnn_num_layers, 
+            bidirectional=True, 
+            batch_first=True)
         self.dropout_layer = nn.Dropout(p=config.dropout)
+        self.output_layer = TaggingFNNDecoder(config.rnn_hidden_size, config.num_tags, config.tag_pad_idx, num_layers=config.mlp_num_layers, hidden_size=config.mlp_hidden_size)
         self.output_layer = TaggingFNNDecoder(config.rnn_hidden_size, config.num_tags, config.tag_pad_idx, num_layers=config.mlp_num_layers, hidden_size=config.mlp_hidden_size)
 
     def forward(self, batch):
@@ -24,6 +30,7 @@ class SLUTagging(nn.Module):
         lengths = batch.lengths
 
         embed = self.word_embed(input_ids)
+        packed_inputs = rnn_utils.pack_padded_sequence(embed, lengths, batch_first=True)
         packed_inputs = rnn_utils.pack_padded_sequence(embed, lengths, batch_first=True)
         packed_rnn_out, h_t_c_t = self.rnn(packed_inputs)  # bsize x seqlen x dim
         rnn_out, unpacked_len = rnn_utils.pad_packed_sequence(packed_rnn_out, batch_first=True)
@@ -75,8 +82,14 @@ class SLUTagging(nn.Module):
         return predictions, labels, loss.cpu().item()
 
 
-"""
+'''
 class TaggingFNNDecoder(nn.Module):
+    """ Contains a fully connected layer and a softmax layer.
+    Input: a batch of hidden vectors of RNN, 
+    whose shape is 'size of batch' x 'length of the longest sequence' x 'dim of hidden vector'.
+    Output: a batch of probabilities of tags, 
+    whose shape is 'size of batch' x 'length of the longest sequence' x 'num of tags`.
+    """    
 
     def __init__(self, input_size, num_tags, pad_id):
         super(TaggingFNNDecoder, self).__init__()
@@ -92,7 +105,7 @@ class TaggingFNNDecoder(nn.Module):
             loss = self.loss_fct(logits.view(-1, logits.shape[-1]), labels.view(-1))
             return prob, loss
         return prob
-"""
+'''
 
 
 class TaggingFNNDecoder(nn.Module):
