@@ -45,7 +45,7 @@ class SLUTagging(nn.Module):
         Returns:
             predictions (list[ list[str] ]): each of its items is a list of tags of one sentence in the batch
             labels (list[ list[str] ]): each of its items is a list of slot-value pairs of one sentence in the batch
-            loss: the loss on this batch (cross entropy loss computed by TaggingFNNDecoder.forward)
+            loss (tensor): the loss on this batch (cross entropy loss computed by TaggingFNNDecoder.forward)
         """        
         batch_size = len(batch)
         labels = batch.labels  # list of semantics of each sentence

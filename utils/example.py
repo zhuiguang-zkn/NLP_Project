@@ -11,7 +11,7 @@ class Example():
     `ex = {'utt_id': 1, 'manual_transcript': '我要去新光北路', 'asr_1best': '我要去新光北路', 'semantic': [['inform', '终点名称', '新光北路']]},`
 
     then
-    + `obj.utt = '我要去新光北路'`, 
+    + `obj.utt = '我要去新光北路'` (`ex['asr_1best']`),
     + `obj.slot = {'inform-终点名称': '新光北路'}`, 
     + `obj.tags = ['O', 'O', 'O', 'B-inform-终点名称', 'I-inform-终点名称', 'I-inform-终点名称', 'I-inform-终点名称']`,
     + `obj.slotvalue = ['inform-终点名称-新光北路']`,
@@ -19,11 +19,13 @@ class Example():
     + `obj.tag_id = [1, 1, 1, 14, 15, 15, 15]` (indices of tags of words).
 
     Also, the class method `load_dataset` returns a list of `Example` objects from dataset, and the class method 
-    `configuration` initializes objects of `Evaluator`, `Vocab`, `Word2vecUtils` and `LabelVocab` as class attributes.
+    `configuration` initializes instances of `Evaluator`, `Vocab`, `Word2vecUtils` and `LabelVocab` as class attributes.
     """    
 
     @classmethod
     def configuration(cls, root, train_path=None, word2vec_path=None):
+        """ Initializes instances of `Evaluator`, `Vocab`, `Word2vecUtils` and `LabelVocab` as class attributes.
+        """        
         cls.evaluator = Evaluator()
         cls.word_vocab = Vocab(padding=True, unk=True, filepath=train_path)
         cls.word2vec = Word2vecUtils(word2vec_path)
