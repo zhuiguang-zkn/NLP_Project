@@ -9,11 +9,14 @@ class SLUTagging(nn.Module):
     def __init__(self, config):
         super(SLUTagging, self).__init__()
         self.config = config
-        self.cell = config.encoder_cell
-            # config.encoder_cell in ['LSTM', 'GRU', 'RNN']
+        self.cell = config.encoder_cell  # config.encoder_cell in ['LSTM', 'GRU', 'RNN']
         self.word_embed = nn.Embedding(config.vocab_size, config.embed_size, padding_idx=0)
-        self.rnn = getattr(nn, self.cell)(config.embed_size, config.rnn_hidden_size // 2, num_layers=config.rnn_num_layers, bidirectional=True, batch_first=True)
-            # self.rnn in ['LSTM', 'GRU', 'RNN']
+        self.rnn = getattr(nn, self.cell)(  # self.rnn in ['LSTM', 'GRU', 'RNN']
+            config.embed_size,
+            config.rnn_hidden_size // 2, 
+            num_layers=config.rnn_num_layers, 
+            bidirectional=True, 
+            batch_first=True)
         self.dropout_layer = nn.Dropout(p=config.dropout)
         self.output_layer = TaggingFNNDecoder(config.rnn_hidden_size, config.num_tags, config.tag_pad_idx, num_layers=config.mlp_num_layers, hidden_size=config.mlp_hidden_size)
 
@@ -45,38 +48,52 @@ class SLUTagging(nn.Module):
             loss (tensor): the loss on this batch (cross entropy loss computed by TaggingFNNDecoder.forward)
         """        
         batch_size = len(batch)
-        labels = batch.labels
-        prob, loss = self.forward(batch)
+        labels = batch.labels  # list of semantics of each sentence
+        prob, loss = self.forward(batch)  # compute the prob of each tag for each word in each sentence
         predictions = []
-        for i in range(batch_size):
-            pred = torch.argmax(prob[i], dim=-1).cpu().tolist()
+        for i in range(batch_size):  
+            # process the i-th sentence in the batch
+            pred = torch.argmax(prob[i], dim=-1).cpu().tolist()  # the most likely tags for the words
+            # `pred_tuple` contains all slot-value pairs in this sentence.
             pred_tuple = []
+            # For each slot-value pair, `idx_buff` and `tag_buff` contains 
+            # positions and tags of corresponding words.
+            # For this sentence, `pred_tags` contains all tags.
             idx_buff, tag_buff, pred_tags = [], [], []
-            pred = pred[:len(batch.utt[i])]
-            for idx, tid in enumerate(pred):
-                tag = label_vocab.convert_idx_to_tag(tid)
+            pred = pred[: len(batch.utt[i])]  # discard the padding
+            for idx, tid in enumerate(pred):  
+                # process one word in the sentence
+                tag = label_vocab.convert_idx_to_tag(tid)  # the most likely tag for this word
                 pred_tags.append(tag)
-                if (tag == 'O' or tag.startswith('B')) and len(tag_buff) > 0:
-                    slot = '-'.join(tag_buff[0].split('-')[1:])
-                    value = ''.join([batch.utt[i][j] for j in idx_buff])
+                if (tag == "O" or tag.startswith("B")) and len(tag_buff) > 0:
+                    # add one slot-value pair since it has been collected
+                    slot = "-".join(tag_buff[0].split("-")[1:])
+                    value = "".join([batch.utt[i][j] for j in idx_buff])
                     idx_buff, tag_buff = [], []
-                    pred_tuple.append(f'{slot}-{value}')
-                    if tag.startswith('B'):
+                    pred_tuple.append(f"{slot}-{value}")
+                    if tag.startswith("B"):
                         idx_buff.append(idx)
                         tag_buff.append(tag)
-                elif tag.startswith('I') or tag.startswith('B'):
+                elif tag.startswith("I") or tag.startswith("B"):
                     idx_buff.append(idx)
                     tag_buff.append(tag)
             if len(tag_buff) > 0:
-                slot = '-'.join(tag_buff[0].split('-')[1:])
-                value = ''.join([batch.utt[i][j] for j in idx_buff])
-                pred_tuple.append(f'{slot}-{value}')
+                # add the last slot-value pair
+                slot = "-".join(tag_buff[0].split("-")[1:])
+                value = "".join([batch.utt[i][j] for j in idx_buff])
+                pred_tuple.append(f"{slot}-{value}")
             predictions.append(pred_tuple)
         return predictions, labels, loss.cpu().item()
 
 
-"""
+'''
 class TaggingFNNDecoder(nn.Module):
+    """ Contains a fully connected layer and a softmax layer.
+    Input: a batch of hidden vectors of RNN, 
+    whose shape is 'size of batch' x 'length of the longest sequence' x 'dim of hidden vector'.
+    Output: a batch of probabilities of tags, 
+    whose shape is 'size of batch' x 'length of the longest sequence' x 'num of tags`.
+    """    
 
     def __init__(self, input_size, num_tags, pad_id):
         super(TaggingFNNDecoder, self).__init__()
@@ -92,7 +109,7 @@ class TaggingFNNDecoder(nn.Module):
             loss = self.loss_fct(logits.view(-1, logits.shape[-1]), labels.view(-1))
             return prob, loss
         return prob
-"""
+'''
 
 
 class TaggingFNNDecoder(nn.Module):

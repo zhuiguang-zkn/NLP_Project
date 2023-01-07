@@ -93,6 +93,7 @@ def decode(choice):
 
 if __name__=='__main__':
     args = init_args(sys.argv[1:])
+    set_random_seed(args.seed)
     print("Initialization finished ...")
     Example, train_dataset, dev_dataset, device = preperation(args)
 
