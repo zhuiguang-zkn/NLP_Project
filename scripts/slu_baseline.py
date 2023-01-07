@@ -94,7 +94,7 @@ if not args.testing:
             count += 1
         print('Training: \tEpoch: %d\tTime: %.4f\tTraining Loss: %.4f' % (i, time.time() - start_time, epoch_loss / count))
         torch.cuda.empty_cache()
-        gc.collect()
+        gc.collect() # Run the garbage collector
 
         start_time = time.time()
         metrics, dev_loss = decode('dev')
