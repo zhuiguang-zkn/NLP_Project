@@ -1,0 +1,6 @@
+------------------------------
+2023-01-07 03:41:23.697103
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = asr_1best  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+------------------------------
+2023-01-07 04:10:11.095538
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = asr_1best  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
