@@ -3,5 +3,7 @@ utils/__pycache__/*
 model.bin
 bert-base-chinese/
 chinese-roberta-wwm-ext/
-RNN_model.bin
+results/
+
+
 

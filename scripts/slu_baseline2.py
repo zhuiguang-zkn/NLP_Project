@@ -19,7 +19,8 @@ from model.slu_baseline_tagging import SLUTagging
 from tqdm import tqdm
 
 
-LOG_FOUT = open(os.path.join(BASE_DIR, 'log_train.txt'), 'a')
+
+
 
 def log_string(out_str):
     LOG_FOUT.write(out_str+'\n')
@@ -202,8 +203,8 @@ def train(model, train_dataset, dev_dataset, device, args):
                     break
                 """
                 # use dev_acc instead of dev_loss as early stop criterion
-                avg_dev_acc = sum(dev_acc_history[-(args.early_stop_epoch+1):-1]) / args.early_stop_epoch
-                if dev_loss < avg_dev_acc:     # dev loss degenerating means overfitting, then early stop is needed!
+                avg_dev_loss = sum(dev_loss_history[-(args.early_stop_epoch+1):-1]) / args.early_stop_epoch
+                if dev_loss < avg_dev_loss:     # dev loss degenerating means overfitting, then early stop is needed!
                     print(f'Early Stoped! Total Epochs: {epoch}')
                     break
     
@@ -278,6 +279,8 @@ def preperation(args):
 if __name__ == "__main__":
     # initialization args
     args = init_args(sys.argv[1:])
+    print("传入的参数为",f"--encoder_cell {args.encoder_cell} --mlp_num_layers {args.mlp_num_layers} --trainset_augmentation {args.trainset_augmentation} --trainset_spoken_language_select {args.trainset_spoken_language_select}  --word_embedding {args.word_embedding} --device {args.device}")
+    LOG_FOUT = open(os.path.join(BASE_DIR, f'log_train_{args.word_embedding}.txt'), 'a')
     print("Initialization finished ...")
 
     Example, train_dataset, dev_dataset, device = preperation(args)

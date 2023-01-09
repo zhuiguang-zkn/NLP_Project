@@ -3,6 +3,8 @@ from utils.vocab import Vocab, LabelVocab
 from utils.word2vec import Word2vecUtils
 from utils.bert2vec import BertUtils, BERT_WWM_EXT, Roberta
 from utils.evaluator import Evaluator
+bioe = True
+
 
 class Example():
     """ Object for describing an example.
@@ -102,6 +104,8 @@ class Example():
             if bidx != -1:
                 self.tags[bidx: bidx + len(value)] = [f'I-{slot}'] * len(value)
                 self.tags[bidx] = f'B-{slot}'
+                if bioe:
+                    self.tags[bidx+len(value)]=f'E-{slot}'
         
         self.slotvalue = [f'{slot}-{value}' for slot, value in self.slot.items()]
         

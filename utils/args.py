@@ -25,7 +25,7 @@ def add_argument_base(arg_parser):
     #### Training Hyperparams ####
     arg_parser.add_argument('--batch_size', default=1, type=int, help='Batch size')
     arg_parser.add_argument('--lr', type=float, default=1e-3, help='learning rate')
-    arg_parser.add_argument('--max_epoch', type=int, default=50, help='terminate after maximum epochs')
+    arg_parser.add_argument('--max_epoch', type=int, default=15, help='terminate after maximum epochs')
 
     arg_parser.add_argument('--eval_interval', default=1, type=int, help='number of intervals to evaluate')
     arg_parser.add_argument('--restore', action='store_true', help='restore training if a checkpoint exists.')

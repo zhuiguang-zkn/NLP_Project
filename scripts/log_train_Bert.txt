@@ -1,0 +1,64 @@
+------------------------------
+2023-01-09 07:27:14.397450
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = asr_1best  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 74.413408, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 80.217391, MEAN DEV RECALL : 76.955162, MEAN DEV FSCORE : 78.552422 
+------------------------------
+
+------------------------------
+2023-01-07 15:51:20.341767
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = manual_transcript  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 77.094972, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.191919, MEAN DEV RECALL : 81.751825, MEAN DEV FSCORE : 80.451514 
+------------------------------
+
+------------------------------
+2023-01-07 16:31:24.290578
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = both  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 76.201117, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.978814, MEAN DEV RECALL : 78.727842, MEAN DEV FSCORE : 79.348397 
+------------------------------
+
+------------------------------
+2023-01-07 17:39:28.529317
+Enco_cell =  LSTM  mlp_num =  2  Aug =  False  trainset = both  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 75.642458, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 78.980229, MEAN DEV RECALL : 79.144943, MEAN DEV FSCORE : 79.062500 
+------------------------------
+
+------------------------------
+2023-01-08 02:17:38.028834
+Enco_cell =  LSTM  mlp_num =  2  Aug =  True  trainset = both  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 74.972067, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.241307, MEAN DEV RECALL : 78.415016, MEAN DEV FSCORE : 78.825996 
+------------------------------
+
+------------------------------
+2023-01-08 03:33:28.094350
+Enco_cell =  GRU  mlp_num =  1  Aug =  False  trainset = asr_1best  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 73.072626, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 78.688525, MEAN DEV RECALL : 75.078206, MEAN DEV FSCORE : 76.840982 
+------------------------------
+
+------------------------------
+2023-01-08 05:24:10.743785
+Enco_cell =  GRU  mlp_num =  1  Aug =  False  trainset = manual_transcript  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 77.206704, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.179487, MEAN DEV RECALL : 80.500521, MEAN DEV FSCORE : 79.834540 
+------------------------------
+
+------------------------------
+2023-01-08 04:18:00.576247
+Enco_cell =  GRU  mlp_num =  1  Aug =  False  trainset = both  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 75.977654, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.535865, MEAN DEV RECALL : 78.623566, MEAN DEV FSCORE : 79.077084 
+------------------------------
+
+
+
+------------------------------
+2023-01-08 06:02:38.120343
+Enco_cell =  GRU  mlp_num =  2  Aug =  False  trainset = both  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 75.642458, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.343220, MEAN DEV RECALL : 78.102190, MEAN DEV FSCORE : 78.717814 
+------------------------------
+
+------------------------------
+2023-01-08 07:16:18.816405
+Enco_cell =  GRU  mlp_num =  2  Aug =  True  trainset = both  anti =  False  word_embedding =  Bert  runs =  1 early_stop = 10
+AVG DEV ACC : 74.525140, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 76.683938, MEAN DEV RECALL : 77.163712, MEAN DEV FSCORE : 76.923077 
+------------------------------
+
+
+

@@ -1,0 +1,61 @@
+
+------------------------------
+2023-01-07 15:51:20.981121
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = asr_1best  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 73.184358, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.911700, MEAN DEV RECALL : 75.495308, MEAN DEV FSCORE : 77.640751 
+------------------------------
+
+------------------------------
+2023-01-07 16:23:53.027852
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = manual_transcript  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 76.648045, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.278351, MEAN DEV RECALL : 80.187696, MEAN DEV FSCORE : 79.730430 
+------------------------------
+
+------------------------------
+2023-01-07 17:02:28.562224
+Enco_cell =  LSTM  mlp_num =  1  Aug =  False  trainset = both  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 76.089385, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 78.892372, MEAN DEV RECALL : 78.727842, MEAN DEV FSCORE : 78.810021 
+------------------------------
+
+------------------------------
+2023-01-07 18:12:04.201803
+Enco_cell =  LSTM  mlp_num =  2  Aug =  False  trainset = both  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 75.307263, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 79.978587, MEAN DEV RECALL : 77.893639, MEAN DEV FSCORE : 78.922345 
+------------------------------
+
+------------------------------
+2023-01-08 02:17:40.979300
+Enco_cell =  LSTM  mlp_num =  2  Aug =  True  trainset = both  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 74.748603, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 78.450106, MEAN DEV RECALL : 77.059437, MEAN DEV FSCORE : 77.748553 
+------------------------------
+
+------------------------------
+2023-01-08 03:33:17.997668
+Enco_cell =  GRU  mlp_num =  1  Aug =  False  trainset = asr_1best  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 73.184358, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 78.993435, MEAN DEV RECALL : 75.286757, MEAN DEV FSCORE : 77.095569 
+------------------------------
+
+------------------------------
+2023-01-08 04:18:03.905611
+Enco_cell =  GRU  mlp_num =  1  Aug =  False  trainset = both  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 75.195531, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 77.254098, MEAN DEV RECALL : 78.623566, MEAN DEV FSCORE : 77.932817 
+------------------------------
+
+------------------------------
+2023-01-08 05:26:45.727166
+Enco_cell =  GRU  mlp_num =  1  Aug =  False  trainset = manual_transcript  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 77.094972, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 80.189673, MEAN DEV RECALL : 79.353493, MEAN DEV FSCORE : 79.769392 
+------------------------------
+
+------------------------------
+2023-01-08 06:05:10.556321
+Enco_cell =  GRU  mlp_num =  2  Aug =  False  trainset = both  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 74.525140, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 75.614754, MEAN DEV RECALL : 76.955162, MEAN DEV FSCORE : 76.279070 
+------------------------------
+
+------------------------------
+2023-01-08 07:22:00.175797
+Enco_cell =  GRU  mlp_num =  2  Aug =  True  trainset = both  anti =  False  word_embedding =  Roberta  runs =  1 early_stop = 10
+AVG DEV ACC : 73.743017, STD DEV ACC : 0.000000, MEAN DEV PRECISION : 77.378436, MEAN DEV RECALL : 76.329510, MEAN DEV FSCORE : 76.850394 
+------------------------------
+
