@@ -105,7 +105,6 @@ def anti_noise_prediction(preds):
              '页码' : [Example.label_vocab.page_map_dic, Example.label_vocab.page_pinyin_set],
              '操作' : [Example.label_vocab.opera_map_dic, Example.label_vocab.opera_pinyin_set],
              '序列号' : [Example.label_vocab.ordinal_map_dic, Example.label_vocab.ordinal_pinyin_set] }
-    cnt = 0
     for i, pred in enumerate(preds):
         if len(pred) == 0 :
             continue
@@ -117,8 +116,6 @@ def anti_noise_prediction(preds):
                     map_dic, pinyin_set = Example.label_vocab.poi_map_dic, Example.label_vocab.poi_pinyin_set
                 else:
                     [map_dic, pinyin_set] = extra[sp[1]]
-                if subst(map_dic, pinyin_set, pronun) != sp[2] :
-                    cnt += 1
                 preds[i][j] = sp[0] + '-' + sp[1] + '-' + subst(map_dic, pinyin_set, pronun)                  
     return  preds            
 
