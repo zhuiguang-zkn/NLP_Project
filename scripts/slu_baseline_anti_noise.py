@@ -119,12 +119,12 @@ def anti_noise_prediction(preds):
                 preds[i][j] = sp[0] + '-' + sp[1] + '-' + subst(map_dic, pinyin_set, pronun)                  
     return  preds            
 
-def subst(map_dic, pinyin_set, tmp_pinyin) :
-    if tmp_pinyin in pinyin_set :
-        return map_dic[tmp_pinyin]
+def subst(map_dic, pinyin_set, noise) :
+    if noise in pinyin_set :
+        return map_dic[noise]
     cnt, prn = 0, ''
     for std_py in iter(pinyin_set) :
-        simval = len(set(std_py.split(' ')) & set(tmp_pinyin.split(' '))) / (len(set(std_py.split(' '))) + len(set(tmp_pinyin.split(' '))))
+        simval = len(set(std_py.split(' ')) & set(noise.split(' '))) / (len(set(std_py.split(' '))) + len(set(noise.split(' '))))
         if simval > cnt :
             cnt = simval
             prn = std_py
